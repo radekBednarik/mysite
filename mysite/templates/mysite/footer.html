@@ -1,0 +1,29 @@
+{% load static %}
+<div id="footer" class="footer-grid flex-container shadow-none p-3 mb-5 bg-light rounded">
+    <p id="copyright" class="footer">
+        <i class="far fa-copyright"></i> 2020 Radek Bednarik
+    </p>
+    <p id="contact" class="footer">
+        <a href="mailto:hicontactmehereplease@gmail.com?subject=Mail from my website">
+            <i class="fas fa-envelope"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/bednarikradek/" rel="noopener" target="_blank">
+            <i class="fab fa-linkedin"></i>
+        </a>
+    </p>
+    <p id="credits" class="footer">
+        Created with
+        <a href="http://www.djangoproject.com/">
+            <img src="https://www.djangoproject.com/m/img/badges/djangosite80x15_grey.gif" border="0"
+                alt="A Django site." title="A Django site." />
+        </a>&nbsp;
+        <a href="https://getbootstrap.com/">
+            <img src="{% static "mysite/bootstrap-solid.svg" %}" border="0" height="20" width="20"
+                alt="Open source toolkit for developing with HTML, CSS and JS." title="Bootstrap." />
+        </a>&nbsp;
+        <a href="https://fontawesome.com/">
+            <img src="{% static "mysite/font-awesome.svg" %}" border="0" height="75" width="150"
+                alt="Get vector icons and social logos on your website." title="Font Awesome." />
+        </a>&nbsp;
+    </p>
+</div>
