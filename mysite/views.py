@@ -6,11 +6,16 @@ from .models import SideBarItems, Content
 class ContentView(TemplateView):
     template_name = "mysite/main.html"
 
-    def get_context_data(self, id, **kwargs):
-        item = get_object_or_404(SideBarItems, pk=id, display=True)
+    def get_context_data(self, page, **kwargs):
+        # for displaying navbar
         items = get_list_or_404(SideBarItems, display=True)
+        # for getting the content when clicked on given navbar link
+        # the identifier is given by <page> in URLconf
+        item = get_object_or_404(SideBarItems, items=str(page).capitalize())
+
         context = super().get_context_data(**kwargs)
         context["content"] = Content.objects.get(side_bar_item_id=item.id)
         context["sidebar"] = items
-        context["id"] = int(id)
+        # to be able to switch link styles between active and not active
+        context["pageid"] = str(page)
         return context

@@ -9,18 +9,18 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul id="navbar-items" class="navbar-nav mr-auto">
-        {% for each in sidebar %}
-        {% if each.id == id %}
-        <li id="navbar-item-{{each.id}}" class="nav-item">
-          <a href="/{{each|lower}}-{{each.id}}" class="nav-link active">
-            {{each}}
+        {% for item in sidebar %}
+        {% if item|lower == pageid %}
+        <li id="navbar-item-{{item.id}}" class="nav-item">
+          <a href="/{{item|lower}}" class="nav-link active">
+            {{item}}
           </a>
-          {% else %}
-        <li id="navbar-item-{{each.id}}" class="nav-item">
-          <a href="/{{each|lower}}-{{each.id}}" class="nav-link">
-            {{each}}
+        {% else %}
+        <li id="navbar-item-{{item.id}}" class="nav-item">
+          <a href="/{{item|lower}}" class="nav-link">
+            {{item}}
           </a>
-          {% endif %}
+        {% endif %}
         </li>
         {% endfor %}
       </ul>
