@@ -1,6 +1,9 @@
+from datetime import datetime as dt
+
 from django.shortcuts import get_list_or_404, get_object_or_404
 from django.views.generic.base import TemplateView
-from .models import SideBarItems, Content
+
+from .models import Content, SideBarItems
 
 
 class ContentView(TemplateView):
@@ -18,4 +21,5 @@ class ContentView(TemplateView):
         context["sidebar"] = items
         # to be able to switch link styles between active and not active
         context["pageid"] = str(page)
+        context["now"] = dt.now()
         return context
