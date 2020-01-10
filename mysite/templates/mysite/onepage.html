@@ -1,0 +1,9 @@
+{% extends "mysite/main.html" %}
+
+{% block filler %}
+<div id="content" class="content-grid">
+  <article>
+    {{content.text|safe}}
+  </article>
+</div>
+{% endblock filler %}

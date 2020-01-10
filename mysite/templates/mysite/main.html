@@ -17,9 +17,6 @@
     <meta name="description" content="Personal website of Radek Bednarik - software tester." />
     <meta name="robots" content="all" />
     <meta name="googlebot" content="all" />
-    {% comment %}
-    <link rel="canonical" href="https://example.com" /> {% endcomment %}
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'mysite/styles.css' %}" />
@@ -39,7 +36,9 @@
       <div id="grid-container" class="container-sm">
         {% include "mysite/header.html" %}
         {% include "mysite/navbar.html" %}
-        {% include "mysite/content.html" %}
+   
+        {% block filler %}{% endblock filler %}
+
         {% include "mysite/footer.html" %}
       </div>
     </div>

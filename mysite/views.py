@@ -1,25 +1,58 @@
 from datetime import datetime as dt
 
-from django.shortcuts import get_list_or_404, get_object_or_404
 from django.views.generic.base import TemplateView
+from django.views.generic.list import ListView
 
-from .models import Content, SideBarItems
+from .models import MultiPageContent, OnePageContent, SideBarItems
 
 
-class ContentView(TemplateView):
-    template_name = "mysite/main.html"
+class AboutView(TemplateView):
+    template_name = "mysite/onepage.html"
 
-    def get_context_data(self, page, **kwargs):
-        # for displaying navbar
-        items = get_list_or_404(SideBarItems, display=True)
-        # for getting the content when clicked on given navbar link
-        # the identifier is given by <page> in URLconf
-        item = get_object_or_404(SideBarItems, items=str(page).capitalize())
-
+    def get_context_data(self, **kwargs):
+        id_ = SideBarItems.objects.get(items="About")
         context = super().get_context_data(**kwargs)
-        context["content"] = Content.objects.get(side_bar_item_id=item.id)
-        context["sidebar"] = items
-        # to be able to switch link styles between active and not active
-        context["pageid"] = str(page)
+        context["now"] = dt.now()
+        context["content"] = OnePageContent.objects.get(side_bar_item_id=id_)
+        return context
+
+
+class SkillsView(TemplateView):
+    template_name = "mysite/onepage.html"
+
+    def get_context_data(self, **kwargs):
+        id_ = SideBarItems.objects.get(items="Skills")
+        context = super().get_context_data(**kwargs)
+        context["now"] = dt.now()
+        context["content"] = OnePageContent.objects.get(side_bar_item_id=id_)
+        return context
+
+
+class ProjectsView(ListView):
+    template_name = "mysite/multipage.html"
+    paginate_by = 2
+    model = MultiPageContent
+
+    def get_queryset(self):
+        id_ = SideBarItems.objects.get(items="Projects")
+        return MultiPageContent.objects.filter(side_bar_item_id=id_).order_by("id")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["now"] = dt.now()
+        return context
+
+
+class CodeView(ListView):
+    template_name = "mysite/multipage.html"
+    paginate_by = 2
+    model = MultiPageContent
+
+    def get_queryset(self):
+        id_ = SideBarItems.objects.get(items="Code")
+        return MultiPageContent.objects.filter(side_bar_item_id=id_).order_by("id")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         context["now"] = dt.now()
         return context

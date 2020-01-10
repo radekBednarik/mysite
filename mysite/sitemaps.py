@@ -1,12 +1,15 @@
 from django.contrib.sitemaps import Sitemap
-from django.shortcuts import get_list_or_404, get_object_or_404
-from mysite.models import Content, SideBarItems
+from django.urls import reverse
 
-class MySiteSitemap(Sitemap):
+
+class PageSitemap(Sitemap):
     changefreq = "monthly"
     priority = 0.5
     protocol = "https"
 
     def items(self):
-        items = get_list_or_404(SideBarItems, display=True)
-        return items
+        return ["about_page", "skills_page", "projects_page", "code_page"]
+
+    def location(self, item):
+        return reverse(item)
+
